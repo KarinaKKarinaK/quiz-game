@@ -19,10 +19,11 @@ A simple interactive quiz web app built with HTML, CSS, and JavaScript.
 ![Quiz In Progress](screenshots/Screenshot%202025-06-26%20at%200.29.18.png)
 
 ### Answer Feedback
-![Answer Feedback](screenshots/Screenshot%202025-06-26%20at%200.29.48.png)
+![Answer Feedback](screenshots/Screenshot%202025-06-26%20at%200.30.09.png)
 
 ### Results Screen
-![Results Screen](screenshots/Screenshot%202025-06-26%20at%200.30.09.png)
+![Results Screen](screenshots/Screenshot%202025-06-26%20at%200.29.48.png)
+
 
 ## How to Use
 
