@@ -88,6 +88,59 @@ function startQuiz(){
 
 function showQuestion(){
     answersDisabled = false
+
+    const currentQuestion = quizQuestions[currentQuestionIndex]
+
+    currentQuestionSpan.textContext = currentQuestionIndex +1
+
+    const progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
+    questionText.textContent = currentQuestion.question
+    
+    answersContainer.innerHTML ="";
+
+    currentQuestion.answers.forEach((answer) => {
+        const button = document.createElement("button")
+        button.textContent = answer.text
+        button.classList.add("answer-btn")
+        
+        // Dataset is a property of a button that lets you allow to store custom data
+        button.dataset.correct = answer.correct
+
+        button.addEventListener("click", selectAnswer)
+        
+        answersContainer.appendChild(button)
+    });
+}
+
+function selectAnswer(event){
+    if(answersDisabled) return
+
+    answersDisabled = true
+
+    const selectedButton = event.target;
+    const isCorrect = selectedButton.dataset.correct === "true"
+
+    Array.from(answersContainer.children).forEach((button) => {
+        if (button.dataset.correct === "true") {
+            button.classList.add("correct");
+        } else {
+            button.classList.add("incorrect")
+        }
+    });
+
+    if(isCorrect) {
+        score++;
+        scoreSpan.textContent = score;
+    }
+
+    setTimeout(() => {
+        currentQuestionIndex++;
+        
+        // check if tehre are more questions or if teh quiz is done
+        if(currentQuestionIndex < quizQuestions.length) {
+
+        }
+    }, 1000)
 }
 
 function restartQuiz(){
