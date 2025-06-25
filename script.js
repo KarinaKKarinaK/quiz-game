@@ -78,37 +78,40 @@ restartButton.addEventListener("click", restartQuiz)
 function startQuiz(){
     // Reset variables
     currentQuestionIndex =0;
+    score = 0;
     scoreSpan.textContent = 0;
 
-    startScreen.classList.remove("active")
-    startScreen.classList.add("active")
+    startScreen.classList.remove("active");
+    quizScreen.classList.add("active");
 
     showQuestion()
 }
 
-function showQuestion(){
+function showQuestion() {
     answersDisabled = false
 
-    const currentQuestion = quizQuestions[currentQuestionIndex]
+    const currentQuestion = quizQuestions[currentQuestionIndex];
 
-    currentQuestionSpan.textContext = currentQuestionIndex +1
+    currentQuestionSpan.textContent = currentQuestionIndex + 1;
 
     const progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
-    questionText.textContent = currentQuestion.question
+    progressBar.style.width = progressPercent + "%";
+
+    questionText.textContent = currentQuestion.question;
     
     answersContainer.innerHTML ="";
 
     currentQuestion.answers.forEach((answer) => {
-        const button = document.createElement("button")
-        button.textContent = answer.text
-        button.classList.add("answer-btn")
-        
-        // Dataset is a property of a button that lets you allow to store custom data
-        button.dataset.correct = answer.correct
+        const button = document.createElement("button");
+        button.textContent = answer.text;
+        button.classList.add("answer-btn");
 
-        button.addEventListener("click", selectAnswer)
-        
-        answersContainer.appendChild(button)
+        // what is dataset? it's a property of the button element that allows you to store custom data
+        button.dataset.correct = answer.correct;
+
+        button.addEventListener("click", selectAnswer);
+
+        answersContainer.appendChild(button);
     });
 }
 
@@ -134,15 +137,15 @@ function selectAnswer(event){
     }
 
     setTimeout(() => {
-        currentQuestionIndex++;
-        
-        // check if tehre are more questions or if teh quiz is done
-        if(currentQuestionIndex < quizQuestions.length) {
-            showQuestion()
-        } else {
-            showResults()
-        }
-    }, 1000)
+    currentQuestionIndex++;
+
+    // check if there are more questions or if the quiz is over
+    if (currentQuestionIndex < quizQuestions.length) {
+      showQuestion();
+    } else {
+      showResults();
+    }
+  }, 1000);
 }
 
 function showResults() {
